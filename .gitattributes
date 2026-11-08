@@ -1,0 +1,11 @@
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.sln text eol=crlf
+*.vcproj text eol=crlf
+*.cmd text eol=crlf
+*.pdf binary
+# Preserve the teaching materials byte for byte.
+original/** -text

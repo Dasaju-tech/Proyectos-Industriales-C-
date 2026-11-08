@@ -1,0 +1,20 @@
+{
+  "nodes": [
+    {"id": "dt", "op": "input", "name": "dt"},
+    {"id": "tau", "op": "input", "name": "tau"},
+    {"id": "km", "op": "input", "name": "km"},
+    {"id": "vi", "op": "input", "name": "vi"},
+    {"id": "vo", "op": "input", "name": "vo"},
+    {"id": "pos", "op": "input", "name": "pos"},
+    {"id": "rpm_to_degrees", "op": "constant", "value": 6.0},
+    {"id": "voltage_gap", "op": "subtract", "args": ["vi", "vo"]},
+    {"id": "gap_times_dt", "op": "multiply", "args": ["voltage_gap", "dt"]},
+    {"id": "delta_vo", "op": "divide", "args": ["gap_times_dt", "tau"]},
+    {"id": "next_vo", "op": "add", "args": ["vo", "delta_vo"]},
+    {"id": "next_vel", "op": "multiply", "args": ["next_vo", "km"]},
+    {"id": "degrees_per_second", "op": "multiply", "args": ["next_vel", "rpm_to_degrees"]},
+    {"id": "delta_pos", "op": "multiply", "args": ["degrees_per_second", "dt"]},
+    {"id": "next_pos", "op": "add", "args": ["pos", "delta_pos"]}
+  ],
+  "outputs": {"vo": "next_vo", "vel": "next_vel", "pos": "next_pos"}
+}

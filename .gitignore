@@ -1,0 +1,17 @@
+/build/
+/Debug/
+/Release/
+/INFO2_P1/Debug/
+/INFO2_P1/Release/
+__pycache__/
+*.pyc
+*.suo
+*.user
+*.ncb
+*.sdf
+*.opensdf
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.idb
