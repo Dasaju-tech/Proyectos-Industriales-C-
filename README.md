@@ -67,6 +67,15 @@ Edita primero `model/motor.json` y regenera. Conserva en Git tanto el modelo com
 El generador no es un traductor general de Python a C++; transforma un modelo
 JSON de operaciones y dependencias en tablas y un evaluador C++03.
 
+Para probar también el código Windows desde Kali, consulta
+[la guía de MinGW, Wine y VS2008](docs/kali-vs2008.md). Con MinGW i686 y Wine32
+instalados, `python3 tools/test_win32.py` compila los ejecutables Windows,
+ejecuta las pruebas del núcleo, las de la CLI y 29 comprobaciones del temporizador
+real de la API Win32. Estas últimas verifican movimiento, órdenes, parada,
+reinicio y destrucción con callbacks pendientes. `--compile-only` comprueba
+la compilación sin ejecutar Wine; `--arch win64` permite probar la variante de
+64 bits por separado. Este flujo no utiliza el compilador de Microsoft.
+
 ## Modelo y grafo dirigido
 
 Con `dt = T_ms / 1000`, se aplican las ecuaciones del enunciado:
@@ -132,10 +141,17 @@ UndefinedBehaviorSanitizer. Las pruebas contrastan la respuesta con
 `Vo(n)=Vi*(1-(1-dt/tau)^n)` desde reposo, la convergencia, signos y unidades,
 cambios de parámetros, errores de entrada, ciclos y desbordamientos.
 
-**MSVC 2008 y los callbacks reales de Windows quedan pendientes de validación
-en Windows.** Comprobar C++03 con GCC no demuestra compatibilidad completa con
-MSVC ni con su SDK. Se conservan los formatos `.sln` 10 y `.vcproj` 9, Win32,
-sin dependencias modernas ni generación previa obligatoria.
+Además, MinGW GCC 12-posix compiló los tres ejecutables para Windows de 32 y
+64 bits en C++03 estricto. Bajo Wine64 8.0 pasaron las 1536 comprobaciones del
+núcleo, las 29 del temporizador y las 7 pruebas de la CLI. La ejecución de 32
+bits quedó bloqueada porque el kernel de nube no arranca el runtime ELF32 de
+Wine32. No se comprobó visualmente la consola en esta ejecución sin escritorio.
+
+**MSVC 2008 y Windows nativo siguen pendientes de validación.** MinGW y Wine no
+demuestran compatibilidad completa con ese compilador ni con su SDK. Se
+conservan los formatos `.sln` 10 y `.vcproj` 9, Win32, sin dependencias modernas
+ni generación previa obligatoria. Los comandos, resultados y alternativas están
+en [la guía de Kali](docs/kali-vs2008.md).
 
 `original/P1_VersionC_alumno/` conserva los fuentes, la solución y el PDF del
 ZIP sin modificar sus bytes. Se omiten los ejecutables, objetos, cachés y

@@ -61,6 +61,7 @@
 			</File>
 			<File RelativePath=".\Order_versionC.h">
 			</File>
+			<File RelativePath=".\WindowsMotor.h" />
 			<File RelativePath=".\Numeric.h" />
 			<File RelativePath=".\DirectedGraph.h" />
 			<File RelativePath=".\MotorModel_generated.h" />
